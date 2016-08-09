@@ -15,7 +15,13 @@ Use the extracted network information via the Promise:
 
 ```js
 NetworkInfoPromise.then(function(networkInfo) {
-  console.log('Network id: ' + info.uniqueId);
+  console.log(info);
+
+  /*
+  type: 'main',
+  uniqueId: 'fb25ce3f...',
+  genesis: {...},
+   */
 })
 ```
 
