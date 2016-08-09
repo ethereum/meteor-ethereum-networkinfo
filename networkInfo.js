@@ -1,9 +1,5 @@
-
-// fetch genesis block
-console.info('Fetching network info...');
-
-NetworkInfoPromise = new Promise(function(resolve, reject) {
-  new Promise(function(timerDone) {
+NetworkInfoPromise = new P(function(resolve, reject) {
+  new P(function(timerDone) {
     // wait for web3
     var timer = setInterval(function() {
       if (typeof web3 !== 'undefined') {
