@@ -1,7 +1,7 @@
 Package.describe({
   name: 'hiddentao:ethereum-networkinfo',
   summary: 'Ethereum network information package',
-  version: '0.1.0',
+  version: '0.1.1',
   git: 'https://github.com/hiddentao/meteor-ethereum-networkinfo.git'
 });
 
