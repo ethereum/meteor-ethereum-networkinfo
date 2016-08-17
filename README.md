@@ -5,6 +5,10 @@ Waits for a `web3` connection and then extracts network info.
 It fetches the Genesis block information and places it into a 
 Promise - `NetworkInfoPromise` - for use throughout your application.
 
+It also provides a `NetworkifiedCollection` wrapper class for Mongo collections 
+which ensures that network id is stored for each document in the collection, 
+allowing you store [data by network](https://github.com/ethereum/mist/pull/1049).
+
 ## Installation
 
     $ meteor add hiddentao:ethereum-networkinfo
@@ -24,4 +28,14 @@ NetworkInfoPromise.then(function(networkInfo) {
    */
 })
 ```
+
+To _network_-ify a collection do:
+
+```js
+MyCollection = new NetworkifiedCollection(
+  new Mongo.Collection('mydata')
+);
+```
+
+You can then use all the normal Meteor collection methods on the returned object.
 
