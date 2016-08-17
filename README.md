@@ -5,7 +5,7 @@ Waits for a `web3` connection and then extracts network info.
 It fetches the Genesis block information and places it into a 
 Promise - `NetworkInfoPromise` - for use throughout your application.
 
-It also provides a `NetworkifiedCollection` wrapper class for Mongo collections 
+It also provides a proxy wrapper class for Mongo collections 
 which ensures that network id is stored for each document in the collection, 
 allowing you store [data by network](https://github.com/ethereum/mist/pull/1049).
 
@@ -18,7 +18,7 @@ allowing you store [data by network](https://github.com/ethereum/mist/pull/1049)
 Use the extracted network information via the Promise:
 
 ```js
-NetworkInfoPromise.then(function(networkInfo) {
+NetworkInfo.promise.then(function(networkInfo) {
   console.log(info);
 
   /*
@@ -32,7 +32,7 @@ NetworkInfoPromise.then(function(networkInfo) {
 To _network_-ify a collection do:
 
 ```js
-MyCollection = new NetworkifiedCollection(
+MyCollection = new NetworkInfo.ProxyCollection(
   new Mongo.Collection('mydata')
 );
 ```
