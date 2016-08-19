@@ -8,7 +8,7 @@ NetworkInfo = {
 
                     timerDone();
                 }
-            }, 100);    
+            }, 100);
         })
         .then(function() {
             web3.eth.getBlock(0, function(e, res) {
@@ -28,24 +28,24 @@ NetworkInfo = {
                         case '0xd4e56740f876aef8c010b86a40d5f56745a118d0906a34e69aec8c0db1cb8fa3':
                             network = 'main';
                             break;
-                    }   
+                    }
 
                     return resolve({
                       type: network,
                       uniqueId: res.hash,
-                      genesis: res,      
+                      genesis: res,
                     });
                 }
-            });    
+            });
         });
     }),
 
     /**
      * An Ethereum network id aware collection using given collection.
      *
-     * This creates a proxy collection which ensures all queries to the 
+     * This creates a proxy collection which ensures all queries to the
      * underlying original collection take network id into account.
-     * 
+     *
      * @param {[type]} mongoCollection [description]
      */
     ProxyCollection: function(mongoCollection) {
@@ -69,7 +69,7 @@ NetworkInfo = {
             else if(_.isString(selector)) {
                 selector = {
                     network: self._network,
-                    _id: args[0], 
+                    _id: selector,
                 };
             }
             else {
@@ -87,18 +87,14 @@ NetworkInfo = {
                     args = Array.prototype.slice.call(arguments, 1);
 
                 return self._coll[method].apply(self._coll, [self._addToQuery(selector)].concat(args));
-            }  
+            }
         });
 
 
         ['allow', 'deny', 'rawCollection', 'rawDatabase'].forEach(function(method) {
             self[method] = function() {
                 return self._coll[method].apply(self._coll, arguments);
-            }  
+            }
         });
     }
 };
-
-
-
-
