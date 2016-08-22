@@ -1,7 +1,7 @@
 Package.describe({
   name: 'ethereum:networkinfo',
   summary: 'Ethereum network information package',
-  version: '0.2.0',
+  version: '0.2.1',
   git: 'https://github.com/ethereum/meteor-ethereum-networkinfo.git'
 });
 
