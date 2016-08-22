@@ -52,6 +52,7 @@ NetworkInfo = {
         var self = this;
 
         self._coll = mongoCollection;
+        self._name = self._coll._name;
         self._network = null;
 
         NetworkInfo.promise.then(function(networkInfo) {
