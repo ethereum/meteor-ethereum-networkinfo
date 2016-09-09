@@ -55,8 +55,8 @@ NetworkInfo = {
         self._name = self._coll._name;
         self._network = null;
 
-        NetworkInfo.promise.then(function(networkInfo) {
-            self._network = networkInfo.uniqueId;
+        NetworkInfo.promise.then(function() {
+            self._network = NetworkInfo.uniqueId;
         });
 
         self._addToQuery = function(selector) {
