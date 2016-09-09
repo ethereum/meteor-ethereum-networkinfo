@@ -1,4 +1,4 @@
-NetworkInfo = {
+NetworkInfo = { 
     promise: new P(function(resolve, reject) {
         new P(function(timerDone) {
             // wait for web3
@@ -30,11 +30,11 @@ NetworkInfo = {
                             break;
                     }
 
-                    return resolve({
-                      type: network,
-                      uniqueId: res.hash,
-                      genesis: res,
-                    });
+                    NetworkInfo.type = network;
+                    NetworkInfo.uniqueId = res.hash;
+                    NetworkInfo.genesis = res;
+
+                    return resolve();
                 }
             });
         });
@@ -47,35 +47,16 @@ NetworkInfo = {
      * underlying original collection take network id into account.
      *
      * @param {Collectkon} mongoCollection Original collection
-     * @param {Object} [options] Additional options.
-     * @param {Boolean} [options.portOldData] Port non-network-associated data to the active network as soon as it is known.
      */
-    ProxyCollection: function(mongoCollection, options) {
+    ProxyCollection: function(mongoCollection) {
         var self = this;
         
-        options = options || {};
-
         self._coll = mongoCollection;
         self._name = self._coll._name;
         self._network = null;
 
         NetworkInfo.promise.then(function(networkInfo) {
             self._network = networkInfo.uniqueId;
-            
-            // port data
-            if (options.portOldData) {              
-              console.log('Assigning network (' + self._network + ') to un-assigned items in ' + self._name + ' collection');
-              
-              self._coll.update({ 
-                network: { 
-                  $in: [null, undefined] 
-                } 
-              }, { 
-                network: self._network
-              }, { 
-                multi: true 
-              });
-            }
         });
 
         self._addToQuery = function(selector) {
